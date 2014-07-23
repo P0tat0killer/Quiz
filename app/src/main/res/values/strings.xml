@@ -3,6 +3,10 @@
 
     <string name="app_name">Quiz</string>
     <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Settings</string>
+    <string name="action_settings">Einstellungen</string>
+    <string name="Antwort_A">A</string>
+    <string name="Antwort_B">B</string>
+    <string name="Antwort_C">C</string>
+    <string name="Antwort_D">D</string>
 
 </resources>
