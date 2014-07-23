@@ -10,7 +10,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class Sql_datenbank extends SQLiteOpenHelper {
 
     private static String DB_NAME = "myDatabase.db";
-    private static SQLiteDatabase db_;
+    public static SQLiteDatabase db_;
 
 
 
