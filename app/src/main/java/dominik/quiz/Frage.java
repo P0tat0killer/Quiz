@@ -1,6 +1,11 @@
 package dominik.quiz;
 
+import android.app.AlertDialog;
+import android.util.Log;
+
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
@@ -9,57 +14,85 @@ import java.util.Random;
  */
 public class Frage {
 
-    public static List<Frage> fragen = new ArrayList<Frage>();
-    public static int Id;
-    public static String Frage;
-    public static String Richtige_Antwort;
-    public static String Falsche_Antwort_1;
-    public static String Falsche_Antwort_2;
-    public static String Falsche_Antwort_3;
-    public static String Thema;
-    public static int Thema_Id;
+    static public class Antwort {
+        public boolean richtige;
+        public String text;
+        public Antwort(boolean richtige, String text) {
+            this.richtige = richtige;
+            this.text = text;
+        }
+    }
 
-    public Frage(int Id, String Frage, String Richtige_Antwort, String Falsche_Antwort_1, String Falsche_Antwort_2, String Falsche_Antwort_3, String Thema, int Thema_Id){
+    public static List<Frage> fragen = new ArrayList<Frage>();
+
+    public int Id;
+    public String Frage;
+
+    public List<Antwort> Antworten = new ArrayList<Antwort>();
+
+    public Frage(int Id, String Frage, String Richtige_Antwort, String Falsche_Antwort_1, String Falsche_Antwort_2, String Falsche_Antwort_3){
         this.Id = Id;
         this.Frage=Frage;
-        this.Richtige_Antwort=Richtige_Antwort;
-        this.Falsche_Antwort_1=Falsche_Antwort_1;
-        this.Falsche_Antwort_2=Falsche_Antwort_2;
-        this.Falsche_Antwort_3=Falsche_Antwort_3;
-        this.Thema=Thema;
-        this.Thema_Id=Thema_Id;
+
+        Antworten.add(new Antwort(true, Richtige_Antwort));
+        Antworten.add(new Antwort(false, Falsche_Antwort_1));
+        Antworten.add(new Antwort(false, Falsche_Antwort_2));
+        Antworten.add(new Antwort(false, Falsche_Antwort_3));
+
+        shuffle();
+        System.out.print(Antworten.toString());
+        System.out.print(Antworten.toArray());
     }
 
-    public static void addFragen(int Id,String Frage ,String Richtige_Antwort, String Falsche_Antwort_1, String Falsche_Antwort_2, String Falsche_Antwort_3, String Thema, int Thema_Id){
-       Frage f = new Frage(Id, Frage,Richtige_Antwort, Falsche_Antwort_1,Falsche_Antwort_2,Falsche_Antwort_3,Thema,Thema_Id);
+    public static void addFragen(int Id,String Frage ,String Richtige_Antwort, String Falsche_Antwort_1, String Falsche_Antwort_2, String Falsche_Antwort_3){
+       Frage f = new Frage(Id, Frage,Richtige_Antwort, Falsche_Antwort_1,Falsche_Antwort_2,Falsche_Antwort_3);
         fragen.add(f);
     }
-    public static List<Frage> getFragenforThema(String Thema){
-        List<Frage> FragenfuerThema = new ArrayList<dominik.quiz.Frage>();
-      if(dominik.quiz.Thema.containsThema(Thema)){
-          for(int i=0; i < fragen.size(); i++){
-              if(fragen.get(i).getThema().equals(Thema)){
-                  FragenfuerThema.add(FragenfuerThema.size() +1, fragen.get(i));
-              }
 
-          }
-      }
-        return FragenfuerThema;
+    public void shuffle(){
+        Collections.shuffle(Antworten);
     }
 
-    public static Frage nextFrage(String Thema){
-        if(dominik.quiz.Thema.containsThema(Thema)) {
-            Random random = new Random();
-            int size = getFragenforThema(Thema).size();
-            int Fragerandom = random.nextInt(size);
-            List<Frage> fragen_fuer_Thema = getFragenforThema(Thema);
-            Frage f = fragen_fuer_Thema.get(Fragerandom);
-            return f;
+    public static void shuffleAll(){
+        for (int i = 0; i < fragen.size(); ++i) {
+            fragen.get(i).shuffle();
         }
-        return null;
-    }
-    public static String getThema(){
-        return Thema;
     }
 
+    public static Frage nextFrage(){
+            int i = randInt(0, fragen.size()-1);
+            Log.d("Random", i + "");
+            Frage f = fragen.get(i);
+            return f;
+    }
+
+    public static int randInt(int min, int max) {
+
+        // NOTE: Usually this should be a field rather than a method
+        // variable so that it is not re-seeded every call.
+        Random rand = new Random();
+
+        // nextInt is normally exclusive of the top value,
+        // so add 1 to make it inclusive
+        int randomNum = rand.nextInt((max - min) + 1) + min;
+
+        return randomNum;
+    }
+
+
+    public String getRichtigeAntwort(){
+        for (int i = 0; i < Antworten.size(); ++i) {
+            Antwort a = Antworten.get(i);
+            if (a.richtige) {
+                return a.text;
+            }
+        }
+        return "";
+    }
+
+    public String getFrage(){ return Frage; }
+
+    public List<Antwort> getAntworten(){
+        return Antworten;
+    }
   }

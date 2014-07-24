@@ -20,6 +20,10 @@
             android:name=".Start"
             android:label="@string/title_activity_start" >
         </activity>
+        <activity
+            android:name=".Fragen_Seite"
+            android:label="@string/title_activity_fragen__seite" >
+        </activity>
     </application>
 
 </manifest>

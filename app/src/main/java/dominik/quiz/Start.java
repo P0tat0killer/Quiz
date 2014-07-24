@@ -1,15 +1,29 @@
 package dominik.quiz;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
+
+import org.w3c.dom.Text;
+
+import java.util.Collections;
+
 import dominik.quiz.R;
 
 public class Start extends Activity {
     public static String loggedinUser;
+    private Button start;
+    private TextView richtig_text_view;
+    private TextView falsche_text_view;
+    private TextView Stats_view;
+    private Button up;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,7 +33,29 @@ public class Start extends Activity {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         SharedPreferences.Editor editor = prefs.edit();
         loggedinUser = prefs.getString("loggedinuser" , "");
-
+        richtig_text_view = (TextView) findViewById(R.id.richtig_text);
+        falsche_text_view =  (TextView) findViewById(R.id.falsch_text);
+        Stats_view =  (TextView) findViewById(R.id.textView_Stats);
+        up = (Button) findViewById(R.id.update);
+        up.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Update();
+            }
+        });
+        String a = prefs.getString("loggedinuser", "");
+        Stats_view.setText("Statistik für " + a + ":");
+        richtig_text_view.setText(prefs.getInt("user_" + a + "_richtig", 0) + " richtige Antworten");
+        falsche_text_view.setText(prefs.getInt("user_" + a + "_falsch", 0) + " falsche Antworten");
+        start = (Button) findViewById(R.id.start);
+        start.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Frage.shuffleAll();
+                Intent intent = new Intent(getApplicationContext() , Fragen_Seite.class);
+                startActivity(intent);
+            }
+        });
     }
 
 
@@ -41,4 +77,11 @@ public class Start extends Activity {
         }
         return super.onOptionsItemSelected(item);
     }
+    public void Update(){
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        String a = prefs.getString("loggedinuser", "");
+        richtig_text_view.setText(prefs.getInt("user_" + a + "_richtig", 0) + " richtige Antworten");
+        falsche_text_view.setText(prefs.getInt("user_" + a + "_falsch", 0) + " falsche Antworten");
+    }
+
 }
