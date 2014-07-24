@@ -21,7 +21,6 @@ public class Main extends Activity {
 
     Button start;
     EditText username;
-    Sql_datenbank sql;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +39,6 @@ public class Main extends Activity {
         Frage.addFragen(Frage.fragen.size()+1, "Wofür benutzt man einen Fuchsschwanz?" , "Sägen" ,"Angeln" , "Hämmern", "Wildern");
         Frage.addFragen(Frage.fragen.size() +1, "Wie bezeichnet man Wirtschaft noch?", "Ökonomie","Ökologie" ,"Ökotopie" ,"Ökotante");
         Frage.addFragen(Frage.fragen.size() +1 , "Wer sagt: 'Dafür steh ich mit meinem Namen!'?", "Claus Hipp" ,"Robert Koch" , "Von Ardenne", "Kurt Felix");
-        sql = new Sql_datenbank(this);
         username= (EditText) findViewById(R.id.Username);
         start = (Button) findViewById(R.id.start);
         start.setOnClickListener(new View.OnClickListener() {
