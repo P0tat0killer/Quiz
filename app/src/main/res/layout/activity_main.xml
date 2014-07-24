@@ -11,41 +11,23 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/Antwort_A"
-        android:layout_marginBottom="134dp"
-        android:layout_marginLeft="50dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:hint="@string/Antwort_A" />
+        android:text="Start"
+        android:id="@+id/start"
+        android:width="100dp"
+        android:layout_below="@+id/Username"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="89dp" />
 
-    <Button
+    <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/Antwort_B"
-        android:layout_marginRight="50dp"
-        android:layout_alignTop="@+id/Antwort_A"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:hint="@string/Antwort_B" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/Antwort_C"
-        android:layout_marginTop="42dp"
-        android:layout_below="@+id/Antwort_B"
-        android:layout_alignLeft="@+id/Antwort_A"
-        android:layout_alignStart="@+id/Antwort_A"
-        android:hint="@string/Antwort_C" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/Andwort_D"
-        android:layout_alignTop="@+id/Antwort_C"
-        android:layout_alignLeft="@+id/Antwort_B"
-        android:layout_alignStart="@+id/Antwort_B"
-        android:hint="@string/Antwort_D" />
-
+        android:inputType="textPersonName|text"
+        android:text=""
+        android:ems="10"
+        android:id="@+id/Username"
+        android:focusableInTouchMode="true"
+        android:hint="Username"
+        android:layout_marginTop="76dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>

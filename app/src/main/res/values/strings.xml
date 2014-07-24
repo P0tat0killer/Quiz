@@ -8,5 +8,6 @@
     <string name="Antwort_B">B</string>
     <string name="Antwort_C">C</string>
     <string name="Antwort_D">D</string>
+    <string name="title_activity_start">Home</string>
 
 </resources>

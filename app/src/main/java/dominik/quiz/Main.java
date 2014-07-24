@@ -1,67 +1,57 @@
 package dominik.quiz;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class Main extends Activity {
 
-    Button BTN_ANTWORT_A;
-    Button BTN_ANTWORT_B;
-    Button BTN_ANTWORT_C;
-    Button BTN_ANTWORT_D;
+    Button start;
+    EditText username;
     Sql_datenbank sql;
+    public static List<Thema> themen = new ArrayList<Thema>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Thema.reload();
+        Frage.addFragen(Frage.fragen.size() + 1, "Wie viele Bundesländer hat Deutschland?", "16", "15", "7", "18", "Geographie", Thema.getId("Geographie"));
+        Frage.addFragen(Frage.fragen.size() +1, "Wer war der Amerikanische Präsident 1990?" , "George Bush", "Barak Obama", "Bill Clinton", "Ronald Reagan", "Politik", Thema.getId("Politik"));
         sql = new Sql_datenbank(this);
-         BTN_ANTWORT_A = (Button) findViewById(R.id.Antwort_A);
-        BTN_ANTWORT_B = (Button) findViewById(R.id.Antwort_B);
-        BTN_ANTWORT_C = (Button) findViewById(R.id.Antwort_C);
-        BTN_ANTWORT_D =  (Button) findViewById(R.id.Andwort_D);
-
-        BTN_ANTWORT_A.setOnClickListener(new View.OnClickListener() {
+        username= (EditText) findViewById(R.id.Username);
+        start = (Button) findViewById(R.id.start);
+        start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(v == BTN_ANTWORT_A){
-
+                if(v == start) {
+                    if (!username.getText().toString().equals("")) {
+                        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                        SharedPreferences.Editor editor = prefs.edit();
+                        editor.putString("loggedinuser", username.getText().toString());
+                        editor.commit();
+                        Intent intent = new Intent(getApplicationContext(), Start.class);
+                        startActivity(intent);
+                    }
+                }else {
+                    Toast.makeText(getApplicationContext(),"Du musst einen Username eingeben", Toast.LENGTH_LONG).show();
+                    return;
                 }
             }
         });
-        BTN_ANTWORT_B.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(v == BTN_ANTWORT_B){
-
-                }
-            }
-        });
-        BTN_ANTWORT_C.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(v == BTN_ANTWORT_C){
-
-                }
-            }
-        });
-        BTN_ANTWORT_D.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(v == BTN_ANTWORT_D){
-
-                }
-            }
-        });
-
-
-
-
 
     }
 
