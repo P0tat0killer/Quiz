@@ -1,10 +1,8 @@
 package dominik.quiz;
 
-import android.app.AlertDialog;
 import android.util.Log;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
@@ -40,8 +38,6 @@ public class Frage {
         Antworten.add(new Antwort(false, Falsche_Antwort_3));
 
         shuffle();
-        System.out.print(Antworten.toString());
-        System.out.print(Antworten.toArray());
     }
 
     public static void addFragen(int Id,String Frage ,String Richtige_Antwort, String Falsche_Antwort_1, String Falsche_Antwort_2, String Falsche_Antwort_3){
@@ -78,7 +74,6 @@ public class Frage {
 
         return randomNum;
     }
-
 
     public String getRichtigeAntwort(){
         for (int i = 0; i < Antworten.size(); ++i) {

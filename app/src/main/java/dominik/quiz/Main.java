@@ -3,6 +3,7 @@ package dominik.quiz;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.Menu;
@@ -10,7 +11,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import org.w3c.dom.Text;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 
 public class Main extends Activity {
@@ -35,28 +42,29 @@ public class Main extends Activity {
         Frage.addFragen(Frage.fragen.size() +1, "Wofür benutzt man einen Fuchsschwanz?", "Sägen" ,"Angeln", "Hämmern", "Wildern");
         Frage.addFragen(Frage.fragen.size() +1, "Wie bezeichnet man Wirtschaft noch?", "Ökonomie","Ökologie","Ökotopie" ,"Ökotante");
         Frage.addFragen(Frage.fragen.size() +1, "Wer sagt: 'Dafür steh ich mit meinem Namen!'?", "Claus Hipp","Robert Koch", "Von Ardenne", "Kurt Felix");
-        
+
 
         username= (EditText) findViewById(R.id.Username);
         start = (Button) findViewById(R.id.start);
         start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 if(v == start) {
                     if (!username.getText().toString().equals("")) {
+                        start.setBackgroundColor(Color.RED);
                         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
                         SharedPreferences.Editor editor = prefs.edit();
                         editor.putString("loggedinuser", username.getText().toString());
                         editor.commit();
                         Intent intent = new Intent(getApplicationContext(), Start.class);
                         startActivity(intent);
+                    }else {
+                        Toast.makeText(getApplicationContext(), "Du musst einen Usernamen eingeben!", Toast.LENGTH_LONG).show();
                     }
-                }else {
-                    Toast.makeText(getApplicationContext(),"Du musst einen Username eingeben", Toast.LENGTH_LONG).show();
                 }
             }
         });
-
     }
 
     @Override
@@ -76,5 +84,9 @@ public class Main extends Activity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+    public void onResume(){
+        super.onResume();
+        start.setBackgroundColor(Color.GRAY);
     }
 }

@@ -3,6 +3,7 @@ package dominik.quiz;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.Menu;
@@ -23,41 +24,27 @@ public class Start extends Activity {
     private TextView richtig_text_view;
     private TextView falsche_text_view;
     private TextView Stats_view;
-    private Button up;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
 
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        SharedPreferences.Editor editor = prefs.edit();
-        loggedinUser = prefs.getString("loggedinuser" , "");
         richtig_text_view = (TextView) findViewById(R.id.richtig_text);
-        falsche_text_view =  (TextView) findViewById(R.id.falsch_text);
+        falsche_text_view = (TextView) findViewById(R.id.falsch_text);
         Stats_view =  (TextView) findViewById(R.id.textView_Stats);
-        up = (Button) findViewById(R.id.update);
-        up.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Update();
-            }
-        });
-        String a = prefs.getString("loggedinuser", "");
-        Stats_view.setText("Statistik für " + a + ":");
-        richtig_text_view.setText(prefs.getInt("user_" + a + "_richtig", 0) + " richtige Antworten");
-        falsche_text_view.setText(prefs.getInt("user_" + a + "_falsch", 0) + " falsche Antworten");
+
         start = (Button) findViewById(R.id.start);
         start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                start.setBackgroundColor(Color.RED);
                 Frage.shuffleAll();
                 Intent intent = new Intent(getApplicationContext() , Fragen_Seite.class);
                 startActivity(intent);
             }
         });
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -77,11 +64,19 @@ public class Start extends Activity {
         }
         return super.onOptionsItemSelected(item);
     }
+
     public void Update(){
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         String a = prefs.getString("loggedinuser", "");
+        Stats_view.setText("Statistik für " + a + ":");
         richtig_text_view.setText(prefs.getInt("user_" + a + "_richtig", 0) + " richtige Antworten");
         falsche_text_view.setText(prefs.getInt("user_" + a + "_falsch", 0) + " falsche Antworten");
     }
 
+    @Override
+    public void onResume() {
+    super.onResume();
+    Update();
+    start.setBackgroundColor(Color.GRAY);
+    }
 }
