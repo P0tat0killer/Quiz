@@ -66,6 +66,7 @@ public class Fragen_Seite extends Activity implements View.OnClickListener{
                 AlertDialog alt = new AlertDialog.Builder(Fragen_Seite.this).create();
                 alt.setTitle("Zeit ist um!");
                 alt.setMessage("Richtige Antwort: " + richtige_Antwort_fuer_countdown);
+                alt.setIcon(R.drawable.ic_launcher);
                 alt.setCanceledOnTouchOutside(false);
                 alt.setButton(AlertDialog.BUTTON_NEUTRAL, "OK", new DialogInterface.OnClickListener() {
                     @Override
@@ -108,6 +109,7 @@ public class Fragen_Seite extends Activity implements View.OnClickListener{
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.fragen__seite, menu);
+
         return true;
     }
 
@@ -122,9 +124,8 @@ public class Fragen_Seite extends Activity implements View.OnClickListener{
         }
         return super.onOptionsItemSelected(item);
     }
+
     public void onClick(View v){
-
-
         cdt.cancel();
         List<Frage.Antwort> antworten = f.getAntworten();
         Integer idx = (Integer) v.getTag();
@@ -141,8 +142,9 @@ public class Fragen_Seite extends Activity implements View.OnClickListener{
     public void richtig(){
         b=false;
         AlertDialog alt = new AlertDialog.Builder(Fragen_Seite.this).create();
-        alt.setMessage("Richtig!");
+        alt.setTitle("Richtig!");
         alt.setCanceledOnTouchOutside(false);
+        alt.setIcon(R.drawable.ic_launcher);
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         SharedPreferences.Editor editor = prefs.edit();
         int i = prefs.getInt("user_" + prefs.getString("loggedinuser", "")  + "_richtig" , 0);
@@ -164,6 +166,7 @@ public class Fragen_Seite extends Activity implements View.OnClickListener{
         alt.setTitle("Falsch!");
         alt.setMessage("'"+richtige_Antwort_fuer_countdown+"' währe richtig gewesen!");
         alt.setCanceledOnTouchOutside(false);
+        alt.setIcon(R.drawable.ic_launcher);
         alt.setButton(AlertDialog.BUTTON_NEUTRAL, "OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
