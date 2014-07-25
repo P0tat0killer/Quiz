@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.AttributeSet;
@@ -11,6 +12,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
+import android.webkit.DownloadListener;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -27,6 +31,7 @@ public class Start extends Activity {
     private TextView richtig_text_view;
     private TextView falsche_text_view;
     private TextView Stats_view;
+    private WebView web;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +41,17 @@ public class Start extends Activity {
         richtig_text_view = (TextView) findViewById(R.id.richtig_text);
         falsche_text_view = (TextView) findViewById(R.id.falsch_text);
         Stats_view =  (TextView) findViewById(R.id.textView_Stats);
+        web = (WebView) findViewById(R.id.webView);
+        web.getSettings().setJavaScriptEnabled(true);
+        web.setWebViewClient(new WebViewClient() {
+            public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
+            }
+        });
+        web.loadUrl("https://github.com/meinusername/Quiz");
+        NetworkInfo.State s = NetworkInfo.State.DISCONNECTED;
+        if(s.equals(NetworkInfo.State.DISCONNECTED)){
+            web.setVisibility(View.INVISIBLE);
+        }
 
         start = (Button) findViewById(R.id.start);
         start.setOnClickListener(new View.OnClickListener() {
@@ -82,5 +98,18 @@ public class Start extends Activity {
     super.onResume();
     Update();
     start.setBackgroundColor(Color.GRAY);
+        NetworkInfo.State s = NetworkInfo.State.CONNECTED;
+        NetworkInfo.State w = NetworkInfo.State.DISCONNECTED;
+        if(w.equals(NetworkInfo.State.DISCONNECTED)){
+            web.setVisibility(View.INVISIBLE);
+           // web.loadUrl("https://github.com/meinusername/Quiz");
+            return;
+        }
+
+        if(s.equals(NetworkInfo.State.CONNECTED)){
+            web.setVisibility(View.INVISIBLE);
+            web.loadUrl("https://github.com/meinusername/Quiz");
+            return;
+        }
     }
 }
