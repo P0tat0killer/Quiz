@@ -144,6 +144,7 @@ public class Fragen_Seite extends Activity implements View.OnClickListener{
         AlertDialog alt = new AlertDialog.Builder(Fragen_Seite.this).create();
         alt.setTitle("Richtig!");
         alt.setCanceledOnTouchOutside(false);
+        alt.setCancelable(false);
         alt.setIcon(R.drawable.richtig_haken);
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         SharedPreferences.Editor editor = prefs.edit();
@@ -164,6 +165,7 @@ public class Fragen_Seite extends Activity implements View.OnClickListener{
 
         AlertDialog alt = new AlertDialog.Builder(Fragen_Seite.this).create();
         alt.setTitle("Falsch!");
+        alt.setCancelable(false);
         alt.setMessage("'"+richtige_Antwort_fuer_countdown+"' währe richtig gewesen!");
         alt.setCanceledOnTouchOutside(false);
         alt.setIcon(R.drawable.falsch_kreuz);

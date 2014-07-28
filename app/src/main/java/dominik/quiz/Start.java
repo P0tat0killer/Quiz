@@ -107,7 +107,7 @@ public class Start extends Activity {
         }
 
         if(s.equals(NetworkInfo.State.CONNECTED)){
-            web.setVisibility(View.INVISIBLE);
+            web.setVisibility(View.VISIBLE);
             web.loadUrl("https://github.com/meinusername/Quiz");
             return;
         }
