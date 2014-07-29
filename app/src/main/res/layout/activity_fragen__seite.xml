@@ -45,7 +45,11 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:hint="A"
-        style="@android:style/Widget.Button" />
+        style="@android:style/Widget.Button"
+        android:maxWidth="150dp"
+        android:maxHeight="40dp"
+        android:width="150dp"
+        android:height="60dp" />
 
     <Button
         android:layout_width="wrap_content"
@@ -55,7 +59,11 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:hint="C"
-        style="@android:style/Widget.Button" />
+        style="@android:style/Widget.Button"
+        android:maxWidth="150dp"
+        android:maxHeight="40dp"
+        android:width="150dp"
+        android:height="60dp" />
 
     <Button
         android:layout_width="wrap_content"
@@ -65,7 +73,12 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:hint="B"
-        style="@android:style/Widget.Button" />
+        style="@android:style/Widget.Button"
+        android:maxWidth="150dp"
+        android:maxHeight="40dp"
+        android:width="150dp"
+        android:height="60dp"
+        android:singleLine="false" />
 
     <Button
         android:layout_width="wrap_content"
@@ -75,6 +88,9 @@
         android:layout_alignTop="@+id/Antwort_C"
         android:layout_alignLeft="@+id/Antwort_B"
         android:layout_alignStart="@+id/Antwort_B"
-        style="@android:style/Widget.Button" />
+        style="@android:style/Widget.Button"
+        android:maxWidth="150dp"
+        android:width="150dp"
+        android:height="60dp" />
 
 </RelativeLayout>

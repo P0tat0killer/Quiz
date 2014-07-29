@@ -1,11 +1,17 @@
 package dominik.quiz;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.util.Log;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
+import java.util.Set;
 
 /**
  * Created by Dominik on 24.07.2014.
@@ -25,8 +31,10 @@ public class Frage {
 
     public int Id;
     public String Frage;
+    public Boolean answered = false;
 
     public List<Antwort> Antworten = new ArrayList<Antwort>();
+    public static Set<Integer> beantwortetefragen = new HashSet<Integer>();
 
     public Frage(int Id, String Frage, String Richtige_Antwort, String Falsche_Antwort_1, String Falsche_Antwort_2, String Falsche_Antwort_3){
         this.Id = Id;
@@ -55,11 +63,22 @@ public class Frage {
         }
     }
 
-    public static Frage nextFrage(){
-            int i = randInt(0, fragen.size()-1);
-            Log.d("Random", i + "");
-            Frage f = fragen.get(i);
-            return f;
+    public static Frage nextFrage(Activity activity){
+        if (beantwortetefragen.size() == fragen.size()) {
+            beantwortetefragen.clear();
+
+            Toast.makeText(activity, "Neue Runde", Toast.LENGTH_LONG).show();
+        }
+
+       while (true) {
+           int i = randInt(0, fragen.size()-1);
+           Log.d("Random", i + "");
+           Frage f = fragen.get(i);
+           if(!beantwortetefragen.contains(f.Id)){
+               beantwortetefragen.add(f.Id);
+               return f;
+           }
+       }
     }
 
     public static int randInt(int min, int max) {

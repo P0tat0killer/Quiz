@@ -82,15 +82,7 @@ public class Start extends Activity {
     Update();
     start.setBackgroundColor(Color.GRAY);
         NetworkInfo.State s = NetworkInfo.State.CONNECTED;
-        NetworkInfo.State w = NetworkInfo.State.DISCONNECTED;
-        if(w.equals(NetworkInfo.State.DISCONNECTED)){
-            web.setVisibility(View.INVISIBLE);
-            return;
-        }
-
-        if(s.equals(NetworkInfo.State.CONNECTED)){
             web.setVisibility(View.VISIBLE);
-            web.loadUrl("https://github.com/meinusername/Quiz");
-        }
+            web.loadUrl("https://elearning.izt.de/images/fragezeichen.png");
     }
 }

@@ -50,7 +50,7 @@ public class Fragen_Seite extends Activity implements View.OnClickListener{
         A_3.setOnClickListener(this);
         A_4.setOnClickListener(this);
 
-        f = dominik.quiz.Frage.nextFrage();
+        f = dominik.quiz.Frage.nextFrage(this);
 
         setButton();
 
