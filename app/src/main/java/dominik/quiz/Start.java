@@ -7,26 +7,16 @@ import android.graphics.Color;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.util.AttributeSet;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.animation.Animation;
-import android.webkit.DownloadListener;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.TextView;
-
-import org.w3c.dom.Text;
-
-import java.util.ArrayList;
-import java.util.Collections;
-
-import dominik.quiz.R;
+import android.widget.Toast;
 
 public class Start extends Activity {
-    public static String loggedinUser;
     private Button start;
     private TextView richtig_text_view;
     private TextView falsche_text_view;
@@ -68,20 +58,13 @@ public class Start extends Activity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.start, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
-        }
+        Toast.makeText(this, "Es gibt keine Einstellungen!", Toast.LENGTH_LONG).show();
         return super.onOptionsItemSelected(item);
     }
 
@@ -102,14 +85,12 @@ public class Start extends Activity {
         NetworkInfo.State w = NetworkInfo.State.DISCONNECTED;
         if(w.equals(NetworkInfo.State.DISCONNECTED)){
             web.setVisibility(View.INVISIBLE);
-           // web.loadUrl("https://github.com/meinusername/Quiz");
             return;
         }
 
         if(s.equals(NetworkInfo.State.CONNECTED)){
             web.setVisibility(View.VISIBLE);
             web.loadUrl("https://github.com/meinusername/Quiz");
-            return;
         }
     }
 }

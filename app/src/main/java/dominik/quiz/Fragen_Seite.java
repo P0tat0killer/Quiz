@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -100,6 +101,7 @@ public class Fragen_Seite extends Activity implements View.OnClickListener{
             i++;
             editor.putInt("user_" + prefs.getString("loggedinuser", "") + "_falsch", i);
             editor.commit();
+            editor.apply();
         }
 
 
@@ -107,21 +109,13 @@ public class Fragen_Seite extends Activity implements View.OnClickListener{
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.fragen__seite, menu);
-
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
-        }
+        Toast.makeText(this, "Es gibt keine Einstellungen!", Toast.LENGTH_LONG).show();
         return super.onOptionsItemSelected(item);
     }
 
@@ -152,6 +146,7 @@ public class Fragen_Seite extends Activity implements View.OnClickListener{
         i++;
         editor.putInt("user_" + prefs.getString("loggedinuser", "") + "_richtig", i);
         editor.commit();
+        editor.apply();
         alt.setButton(AlertDialog.BUTTON_NEUTRAL, "OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
