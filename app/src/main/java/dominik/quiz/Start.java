@@ -37,7 +37,7 @@ public class Start extends Activity {
             public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
             }
         });
-        web.loadUrl("https://github.com/meinusername/Quiz");
+        web.loadUrl("https://github.com/meyerdominik/Quiz");
         NetworkInfo.State s = NetworkInfo.State.DISCONNECTED;
         if(s.equals(NetworkInfo.State.DISCONNECTED)){
             web.setVisibility(View.INVISIBLE);
